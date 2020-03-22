@@ -81,12 +81,13 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             mouseZ = mouseX;
-            mouseX = 0;
+            mouseX = Mathf.Lerp(mouseX, 0, Time.deltaTime);
+        } else
+        {
+            mouseZ = Mathf.Lerp(mouseZ, 0, Time.deltaTime * 3);
         }
 
-        playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
-
-
+       playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
 
     }
 
@@ -100,6 +101,44 @@ public class PlayerControl : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f);
         }
 
+        if (inputX > 0)
+        {
+            UIManager.Instance.SetRightForce(inputX);
+        }
+        else
+        {
+            UIManager.Instance.SetRightForce(0);
+        }
+
+        if ((inputX < 0))
+        {
+            UIManager.Instance.SetLeftForce(-inputX);
+        }
+        else
+        {
+            UIManager.Instance.SetLeftForce(0);
+        }
+
+        if (inputZ > 0)
+        {
+            UIManager.Instance.SetFrontForce(inputZ);
+        }
+        else
+        {
+            UIManager.Instance.SetFrontForce(0);
+        }
+        if (inputZ < 0)
+        {
+            UIManager.Instance.SetBackForce(-inputZ);
+        }
+        else
+        {
+            UIManager.Instance.SetBackForce(0);
+        }
+
+
+
+
         movement = transform.right * inputX + transform.forward * inputZ;
 
         rb.AddForce(movement * speed);
@@ -109,8 +148,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (!isGrounded)
         {
-            // mainCameraTransform.transform.rotation = Quaternion.Lerp(mainCameraTransform.transform.rotation, Quaternion.Euler(0,0,0), Time.deltaTime * 5);
-
             if (Input.GetKey(KeyCode.A))
             {
                 rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * 3);
@@ -119,11 +156,19 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 rb.AddForce(transform.up * speed);
+                UIManager.Instance.SetUpForce(1);
+            } else
+            {
+                UIManager.Instance.SetUpForce(0);
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 rb.AddForce(-transform.up * speed);
+                UIManager.Instance.SetDownForce(1);
+            } else
+            {
+                UIManager.Instance.SetDownForce(0);
             }
         }
 
