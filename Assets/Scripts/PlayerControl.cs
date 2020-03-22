@@ -6,21 +6,27 @@ public class PlayerControl : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     public float speed = 10f;
-    public float gravity = -1.62f; // moon gravity
+    // public float gravity = -1.62f; // moon gravity
     public float jumpHeight = 3f;
-    public float mass = 70f;
+    public Attractor mainAttractor;
+    public Rigidbody rb;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance = 0.4f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private CharacterController controller;
 
-    private float verticalRotation;
-    private Vector3 movement;
+    private Vector3 lastForceTake;
     private Vector3 velocity;
+    private float verticalRotation;
+    private float mouseX;
+    private float mouseY;
+    private float mouseZ;
+    private Vector3 movement;
     private bool isGrounded;
+    public Transform ground;
+
 
     private void Start()
     {
@@ -31,36 +37,57 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
 
-        if (isGrounded && velocity.y < 0)
+        if (mainAttractor != null)
         {
-            velocity.y = -2f;
+            UIManager.Instance.SetGravity(mainAttractor.gravityToPlayer, mainAttractor.name);
         }
     }
 
     void Update()
     {
-        LookControl();
+        RotationControl();
         GroundMovementControl();
         AerialMovementControl();
     }
 
     private void CheckIsGrounded()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayer);    
+         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayer);
+
+        if (isGrounded)
+        {
+            Collider[] grounds = Physics.OverlapSphere(groundCheck.position, groundCheckDistance, groundLayer);
+
+            ground = grounds[0].transform;
+        }
     }
 
-    private void LookControl()
+    private void RotationControl()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+        //verticalRotation -= mouseY;
 
-        playerTransform.Rotate(Vector3.up * mouseX);
-        mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        //if (isGrounded)
+        //{
+        //    verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+        //    mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        //}
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            mouseZ = mouseX;
+            mouseX = 0;
+        }
+
+        playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
+
+
+
     }
 
     private void GroundMovementControl()
@@ -70,19 +97,45 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f);
         }
 
         movement = transform.right * inputX + transform.forward * inputZ;
-        controller.Move(movement * speed * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        rb.AddForce(movement * speed);
     }
 
     private void AerialMovementControl()
     {
-        // Jetpack
+        if (!isGrounded)
+        {
+            // mainCameraTransform.transform.rotation = Quaternion.Lerp(mainCameraTransform.transform.rotation, Quaternion.Euler(0,0,0), Time.deltaTime * 5);
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * 3);
+            }
+
+            if (Input.GetButton("Jump"))
+            {
+                rb.AddForce(transform.up * speed);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                rb.AddForce(-transform.up * speed);
+            }
+        }
+
     }
 
+    public void GetAttract(Vector3 force, Attractor attractor)
+    {
+        if (lastForceTake.magnitude < force.magnitude && mainAttractor != attractor)
+        {
+            mainAttractor = attractor;
+        }
+
+        rb.AddForce(force);
+    }
 }
