@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-    public float speed = 10f;
+    public float aerialSpeed = 10f;
+    public float groundSpeed = 10f;
     // public float gravity = -1.62f; // moon gravity
     public float jumpHeight = 3f;
     public Attractor mainAttractor;
@@ -40,6 +41,9 @@ public class PlayerControl : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
 
+        GroundMovementControl();
+        AerialMovementControl();
+
         if (mainAttractor != null)
         {
             UIManager.Instance.SetGravity(mainAttractor.gravityToPlayer, mainAttractor.name);
@@ -49,19 +53,34 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         RotationControl();
-        GroundMovementControl();
-        AerialMovementControl();
     }
 
     private void CheckIsGrounded()
     {
-         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayer);
+
+        if (Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayer))
+        {
+            if (!isGrounded)
+            {
+                transform.rotation = (Quaternion.FromToRotation(-transform.up, mainAttractor.transform.position - this.transform.position)) * transform.rotation;
+            }
+
+            isGrounded = true;
+
+        }
+        else
+        {
+
+            isGrounded = false;
+        }
 
         if (isGrounded)
         {
             Collider[] grounds = Physics.OverlapSphere(groundCheck.position, groundCheckDistance, groundLayer);
 
             ground = grounds[0].transform;
+
+            Debug.DrawRay(this.transform.position, mainAttractor.transform.position, Color.red);
         }
     }
 
@@ -70,36 +89,49 @@ public class PlayerControl : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        //verticalRotation -= mouseY;
-
-        //if (isGrounded)
-        //{
-        //    verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
-        //    mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
-        //}
-
         if (Input.GetKey(KeyCode.E))
         {
             mouseZ = mouseX;
             mouseX = Mathf.Lerp(mouseX, 0, Time.deltaTime);
-        } else
+        }
+        else
         {
             mouseZ = Mathf.Lerp(mouseZ, 0, Time.deltaTime * 3);
         }
 
-       playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
+        if (!isGrounded)
+        {
+            playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
+        }
+        else
+        {
+            verticalRotation -= mouseY;
+            playerTransform.Rotate(Vector3.up * mouseX);
+            verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+            mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        }
+
 
     }
 
     private void GroundMovementControl()
     {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputZ = Input.GetAxis("Vertical");
+        float inputX = 0;
+        float inputZ = 0;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f);
+            inputX = Input.GetAxis("Horizontal");
+            inputZ = Input.GetAxis("Vertical");
         }
+        else
+        {
+            inputX = Input.GetAxisRaw("Horizontal");
+            inputZ = Input.GetAxisRaw("Vertical");
+        }
+
+
+
 
         if (inputX > 0)
         {
@@ -137,11 +169,31 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-
-
         movement = transform.right * inputX + transform.forward * inputZ;
 
-        rb.AddForce(movement * speed);
+        if (!isGrounded)
+        {
+            rb.AddForce(movement * aerialSpeed);
+        }
+        else
+        {
+            Vector3 jumpVel = Vector3.zero;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpVel = transform.up * jumpHeight;
+            }
+
+            rb.velocity =  movement * groundSpeed + jumpVel;
+
+
+
+            if (inputX == 0 && inputZ == 0)
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 10);
+            }
+        }
+
     }
 
     private void AerialMovementControl()
@@ -155,18 +207,20 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
-                rb.AddForce(transform.up * speed);
+                rb.AddForce(transform.up * aerialSpeed);
                 UIManager.Instance.SetUpForce(1);
-            } else
+            }
+            else
             {
                 UIManager.Instance.SetUpForce(0);
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                rb.AddForce(-transform.up * speed);
+                rb.AddForce(-transform.up * aerialSpeed);
                 UIManager.Instance.SetDownForce(1);
-            } else
+            }
+            else
             {
                 UIManager.Instance.SetDownForce(0);
             }
@@ -182,5 +236,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         rb.AddForce(force);
+
+
     }
 }
