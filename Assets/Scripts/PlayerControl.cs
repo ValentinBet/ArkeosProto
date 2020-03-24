@@ -6,17 +6,26 @@ public class PlayerControl : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     public float aerialSpeed = 10f;
-    public float groundSpeed = 10f;
+    public float groundSpeed = 6f;
+    public float runGroundSpeed = 8.5f;
     // public float gravity = -1.62f; // moon gravity
     public float jumpHeight = 3f;
-    public Attractor mainAttractor;
     public Rigidbody rb;
+    public LayerMask groundLayer;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance = 0.4f;
-    [SerializeField] private LayerMask groundLayer;
+
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private Transform playerTransform;
+
+    [Header("Gravity Zone properties")]
+    public float gravZoneRotateTime = 0.5f;
+    public GravityZone gravityZone;
+    public bool isOnGravityZone = false;
+    public bool isSettingGravZoneRotation = false;
+    private Quaternion gravZoneRotation;
+    [Space(8)]
 
     private Vector3 lastForceTake;
     private Vector3 velocity;
@@ -25,9 +34,9 @@ public class PlayerControl : MonoBehaviour
     private float mouseY;
     private float mouseZ;
     private Vector3 movement;
+
     private bool isGrounded;
     public Transform ground;
-
 
     private void Start()
     {
@@ -40,37 +49,52 @@ public class PlayerControl : MonoBehaviour
     {
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
-
-        GroundMovementControl();
-        AerialMovementControl();
-
-        if (mainAttractor != null)
-        {
-            UIManager.Instance.SetGravity(mainAttractor.gravityToPlayer, mainAttractor.name);
-        }
-    }
-
-    void Update()
-    {
         RotationControl();
+
+        if (isSettingGravZoneRotation)
+        {
+            if (isOnGravityZone)
+            {
+                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, gravZoneRotation, Time.deltaTime * 10);
+            }
+            else
+            {
+                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10);
+            }
+        }
+        else
+        {
+            GroundMovementControl();
+            AerialMovementControl();
+
+
+        }
+
+        if (isOnGravityZone)
+        {
+            rb.AddForce(-transform.up * 50);
+        }
+
+
     }
 
     private void CheckIsGrounded()
     {
 
-        if (Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundLayer))
+        if (Physics.Raycast(groundCheck.position, -transform.up, groundCheckDistance, groundLayer))
         {
+
             if (!isGrounded)
             {
-                transform.rotation = (Quaternion.FromToRotation(-transform.up, mainAttractor.transform.position - this.transform.position)) * transform.rotation;
+                print("grounded");
             }
 
-            isGrounded = true;
+            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), Time.deltaTime * 6);
 
+            isGrounded = true;
         }
         else
         {
-
             isGrounded = false;
         }
 
@@ -80,7 +104,6 @@ public class PlayerControl : MonoBehaviour
 
             ground = grounds[0].transform;
 
-            Debug.DrawRay(this.transform.position, mainAttractor.transform.position, Color.red);
         }
     }
 
@@ -89,27 +112,10 @@ public class PlayerControl : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            mouseZ = mouseX;
-            mouseX = Mathf.Lerp(mouseX, 0, Time.deltaTime);
-        }
-        else
-        {
-            mouseZ = Mathf.Lerp(mouseZ, 0, Time.deltaTime * 3);
-        }
-
-        if (!isGrounded)
-        {
-            playerTransform.Rotate(-1 * mouseY, 1 * mouseX, -1 * mouseZ);
-        }
-        else
-        {
-            verticalRotation -= mouseY;
-            playerTransform.Rotate(Vector3.up * mouseX);
-            verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
-            mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
-        }
+        verticalRotation -= mouseY;
+        playerTransform.Rotate(Vector3.up * mouseX);
+        verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+        mainCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
 
     }
@@ -129,8 +135,6 @@ public class PlayerControl : MonoBehaviour
             inputX = Input.GetAxisRaw("Horizontal");
             inputZ = Input.GetAxisRaw("Vertical");
         }
-
-
 
 
         if (inputX > 0)
@@ -177,20 +181,18 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            Vector3 jumpVel = Vector3.zero;
-
             if (Input.GetButtonDown("Jump"))
             {
-                jumpVel = transform.up * jumpHeight;
+                rb.velocity += jumpHeight * transform.up;
             }
 
-            rb.velocity =  movement * groundSpeed + jumpVel;
-
-
-
-            if (inputX == 0 && inputZ == 0)
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 10);
+                rb.MovePosition(transform.position + (movement * Time.deltaTime * runGroundSpeed));
+            }
+            else
+            {
+                rb.MovePosition(transform.position + (movement * Time.deltaTime * groundSpeed));
             }
         }
 
@@ -200,11 +202,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (!isGrounded)
         {
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * 3);
-            }
-
             if (Input.GetButton("Jump"))
             {
                 rb.AddForce(transform.up * aerialSpeed);
@@ -215,7 +212,7 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetUpForce(0);
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
                 rb.AddForce(-transform.up * aerialSpeed);
                 UIManager.Instance.SetDownForce(1);
@@ -225,18 +222,35 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetDownForce(0);
             }
         }
-
     }
 
-    public void GetAttract(Vector3 force, Attractor attractor)
+
+    public void EnterGravityZone(GravityZone gravityZone)
     {
-        if (lastForceTake.magnitude < force.magnitude && mainAttractor != attractor)
-        {
-            mainAttractor = attractor;
-        }
-
-        rb.AddForce(force);
-
-
+        this.gravityZone = gravityZone;
+        gravZoneRotation = gravityZone.parent.transform.rotation;
+        isOnGravityZone = true;
+        rb.useGravity = false;
+        StartCoroutine(SetRotationInGravZone());
     }
+
+
+    public void ExitGravityZone(GravityZone gravityZone)
+    {
+        if (this.gravityZone = gravityZone)
+        {
+            rb.useGravity = true;
+            this.gravityZone = null;
+            isOnGravityZone = false;
+            StartCoroutine(SetRotationInGravZone());
+        }
+    }
+
+    IEnumerator SetRotationInGravZone()
+    {
+        isSettingGravZoneRotation = true;
+        yield return new WaitForSeconds(gravZoneRotateTime);
+        isSettingGravZoneRotation = false;
+    }
+
 }

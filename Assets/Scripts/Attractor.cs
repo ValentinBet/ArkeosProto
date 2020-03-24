@@ -14,7 +14,7 @@ public class Attractor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        AttractPlayer(player);
+        //AttractPlayer(player);
     }
 
     public void AttractPlayer(PlayerControl player)
@@ -27,6 +27,6 @@ public class Attractor : MonoBehaviour
         float forceMagnitude = fakeGravityForce * (gravityToPlayer * (mass * player.rb.mass) / Mathf.Pow(distanceToPlayer, 2));
         Vector3 force = direction.normalized * forceMagnitude;
 
-        player.GetAttract(force, this);
+        //player.GetAttract(force, this);
     } 
 }
