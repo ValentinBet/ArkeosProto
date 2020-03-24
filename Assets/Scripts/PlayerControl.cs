@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 10);
+                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 3);
             }
         }
         else
