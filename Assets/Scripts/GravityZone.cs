@@ -5,6 +5,7 @@ using UnityEngine;
 public class GravityZone : MonoBehaviour
 {
     public GameObject parent;
+    public float gravZonePower = 20f;
     
     private void Start()
     {
@@ -17,10 +18,12 @@ public class GravityZone : MonoBehaviour
         {
 
             PlayerControl _pc = other.GetComponent<PlayerControl>();
+            _pc.gravZonePower = this.gravZonePower;
             _pc.EnterGravityZone(this);
             this.parent.layer = 8;
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
