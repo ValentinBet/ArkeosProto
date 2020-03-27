@@ -276,7 +276,7 @@ public class PlayerControl : MonoBehaviour
 
     public void ExitGravityZone(GravityZone gravityZone)
     {
-        if (this.gravityZone = gravityZone)
+        if (this.gravityZone == gravityZone)
         {
             rb.useGravity = true;
             this.gravityZone = null;
