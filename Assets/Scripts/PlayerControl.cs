@@ -231,19 +231,20 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetBackForce(0);
             }
         }
-        else
+
+       if (isGrounded || (inputX == 0 || inputZ == 0))
         {
             jetPackFuel += jetPackRegen;
         }
 
         movement = transform.right * inputX + transform.forward * inputZ;
 
-        if (!isGrounded)
+        if (!isGrounded && jetPackFuel > 0)
         {
             jetPackFuel -= (Mathf.Abs(inputX) + Mathf.Abs(inputZ)) * jetPackUsage;
             rb.AddForce(movement * aerialSpeed);
         }
-        else
+        else if (isGrounded)
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -268,7 +269,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (!isGrounded)
         {
-            if (Input.GetButton("Jump") && canUseJetPack)
+            if (Input.GetButton("Jump") && canUseJetPack && jetPackFuel > 0)
             {
                 jetPackFuel -= 1 * jetPackUsage;
                 rb.AddForce(transform.up * aerialSpeed);
@@ -279,7 +280,7 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetUpForce(0);
             }
 
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.LeftControl) && jetPackFuel > 0)
             {
                 jetPackFuel -= 1 * jetPackUsage;
                 rb.AddForce(-transform.up * aerialSpeed);

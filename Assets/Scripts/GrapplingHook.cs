@@ -11,6 +11,7 @@ public class GrapplingHook : MonoBehaviour
     public float hookTravelSpeed;
     public float playerTravelSpeed;
     public float maxDistance;
+    public float distanceToStopHook = 1f;
     public bool fired;
     public bool hooked;
 
@@ -33,7 +34,7 @@ public class GrapplingHook : MonoBehaviour
             fired = false;
             transform.position = Vector3.Lerp(transform.position, hook.transform.position, Time.deltaTime * playerTravelSpeed);
 
-            if (Vector3.Distance(transform.position, hook.transform.position) < 2)
+            if (Vector3.Distance(transform.position, hook.transform.position) < distanceToStopHook)
             {
                 ReturnHook();
             }
