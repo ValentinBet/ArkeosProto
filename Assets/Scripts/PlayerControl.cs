@@ -72,6 +72,19 @@ public class PlayerControl : MonoBehaviour
     {
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            MainFire();
+        }
+        
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            FireGrappler();
+        }
+
+
         if (isSettingGravZoneRotation)
         {
             if (isOnGravityZone)
@@ -84,10 +97,11 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (isSettingExitGravZoneRotation)
+            if (!isOnGravityZone)
             {
                 playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, playerTransform.rotation.eulerAngles.y, 0), Time.deltaTime * rotateSpeedExitGravZone);
             }
+
             AerialMovementControl();
         }
 
@@ -104,6 +118,21 @@ public class PlayerControl : MonoBehaviour
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
     }
 
+    private void MainFire()
+    {
+
+    }
+
+    private void FireGrappler()
+    {
+
+    }
+
+    private void StopGrappling()
+    {
+
+    }
+
     private void CheckIsGrounded()
     {
 
@@ -115,7 +144,7 @@ public class PlayerControl : MonoBehaviour
                 print("grounded");
             }
 
-            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), Time.deltaTime * 6);
+            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), Time.deltaTime * 10);
 
             isGrounded = true;
         }
@@ -201,7 +230,8 @@ public class PlayerControl : MonoBehaviour
             {
                 UIManager.Instance.SetBackForce(0);
             }
-        } else
+        }
+        else
         {
             jetPackFuel += jetPackRegen;
         }
@@ -278,10 +308,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (this.gravityZone == gravityZone)
         {
+            isSettingGravZoneRotation = false;
             rb.useGravity = true;
             this.gravityZone = null;
             isOnGravityZone = false;
-            StartCoroutine(SetExitRotationInGravZone());
         }
     }
 
@@ -290,13 +320,6 @@ public class PlayerControl : MonoBehaviour
         isSettingGravZoneRotation = true;
         yield return new WaitForSeconds(gravZoneEnterRotateTime);
         isSettingGravZoneRotation = false;
-    }
-
-    IEnumerator SetExitRotationInGravZone()
-    {
-        isSettingExitGravZoneRotation = true;
-        yield return new WaitForSeconds(gravZoneExitRotateTime);
-        isSettingExitGravZoneRotation = false;
     }
 
     IEnumerator SetCanUseJetPack()

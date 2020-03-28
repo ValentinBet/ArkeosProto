@@ -16,7 +16,6 @@ public class GravityZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             PlayerControl _pc = other.GetComponent<PlayerControl>();
             _pc.gravZonePower = this.gravZonePower;
             _pc.EnterGravityZone(this);
