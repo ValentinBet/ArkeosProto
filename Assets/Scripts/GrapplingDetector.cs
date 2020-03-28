@@ -8,7 +8,7 @@ public class GrapplingDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") && !other.CompareTag("Immaterial"))
+        if (!other.CompareTag("Player") && !other.CompareTag("Immaterial") && grapplingHook.fired)
         {
             grapplingHook.hooked = true;
         }
