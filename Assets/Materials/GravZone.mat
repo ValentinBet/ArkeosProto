@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GravZone
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: da2487447db403e44b9daf2655583581,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +20,28 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_9D48127C:
+        m_Texture: {fileID: 2800000, guid: edf4225d5f32d31448900235b66d7e15, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AD1090AA:
+        m_Texture: {fileID: 2800000, guid: fd3c0637122bcb147ac8eae1f9aa16b5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B0223ADB:
+        m_Texture: {fileID: 7055666772098914877, guid: 4d34b7ce44dc9194b8179307a0a61f91,
+          type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F5C96D54:
+        m_Texture: {fileID: 6275118376171300557, guid: 4d34b7ce44dc9194b8179307a0a61f91,
+          type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,11 +78,25 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2AE619A0: 1
+    - Vector1_42AF77E8: 1
+    - Vector1_7C55CC6D: 0.5
+    - Vector1_B889B2F3: 1
+    - Vector1_C23D977C: 1
+    - Vector1_FAE8CB1D: 0
+    - _AlphaClip: 0
+    - _Blend: 0
     - _BumpScale: 1
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -67,11 +104,38 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Surface: 0
     - _UVSec: 0
+    - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_117840D7: {r: 0, g: 0, b: 0, a: 0}
+    - Color_7ABCC5D9: {r: 0, g: 0.6588235, b: 1, a: 1}
+    - Color_BC258677: {r: 1, g: 1, b: 1, a: 0}
+    - Vector2_19AE9E3A: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_40DF1A9C: {r: 5, g: 5, b: 0, a: 0}
+    - Vector2_5200A5FE: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_70D50CBA: {r: 10, g: 10, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 0.051016767, b: 0, a: 1}
     - _Color: {r: 1, g: 0.051016767, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+--- !u!114 &8152226624959490129
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
