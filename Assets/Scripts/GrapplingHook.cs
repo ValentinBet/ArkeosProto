@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
+
+
     public GameObject hook;
     public GameObject hookHolder;
     public LineRenderer lineRenderer;
@@ -17,15 +19,23 @@ public class GrapplingHook : MonoBehaviour
 
     private float currentDistance;
     private Vector3 direction;
+    private PlayerControl pc;
 
+    private void Awake()
+    {
+        pc = GetComponent<PlayerControl>();
+    }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !fired)
+        if (Input.GetMouseButtonDown(0) && !fired && !hooked)
         {
             lineRenderer.enabled = true;
             lineRenderer.SetPositions(new Vector3[0]);
             fired = true;
             direction = Camera.main.transform.forward;
+        } else if (Input.GetMouseButtonDown(0))
+        {
+            ReturnHook();
         }
 
 
@@ -37,6 +47,7 @@ public class GrapplingHook : MonoBehaviour
             if (Vector3.Distance(transform.position, hook.transform.position) < distanceToStopHook)
             {
                 ReturnHook();
+                pc.rb.velocity = Vector3.zero;
             }
         }
 

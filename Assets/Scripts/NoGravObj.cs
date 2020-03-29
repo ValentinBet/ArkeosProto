@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NoGravObj : MonoBehaviour
 {
-
     public bool isActivated = true;
     public float testTorquePower = 100f;
 

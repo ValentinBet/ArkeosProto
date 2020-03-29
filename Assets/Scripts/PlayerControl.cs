@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     public float runGroundSpeed = 8.5f;
     public float jumpHeight = 3f;
     public float jetPackWaitTimeAfterJump = 0.2f;
+    public Light jetPackLightFeedback;
 
     [Space(8)]
     [SerializeField] private Transform groundCheck;
@@ -32,7 +33,10 @@ public class PlayerControl : MonoBehaviour
     [Header("JetPack properties")]
     public float jetPackFuel = 100f;
     public float jetPackRegen = 1f;
-    public float jetPackUsage = 2f;
+    public float jetPackHorizontalUsage = 1f;
+    public float jetPackVerticalUsage = 2f;
+    public float baseJetpackLightIntensity = 1f;
+    private float jetPackUsageStack;
 
     [Header("Gravity Zone properties")]
     public float gravZoneEnterRotateTime = 0.5f;
@@ -73,26 +77,13 @@ public class PlayerControl : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            MainFire();
-        }
-        
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            FireGrappler();
-        }
-
-
         if (isSettingGravZoneRotation)
         {
             if (isOnGravityZone)
             {
                 playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, gravZoneRotation, Time.deltaTime * rotateSpeedEnterGravZone);
-
                 // ne fonctionne pas car certain mur on besoin de l'axe Y / permet la stabilité de la caméra
-                // playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(gravZoneRotation.eulerAngles.x, playerTransform.rotation.eulerAngles.y, gravZoneRotation.eulerAngles.z), Time.deltaTime * rotateSpeedEnterGravZone);
+               // playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(gravZoneRotation.eulerAngles.x, playerTransform.rotation.eulerAngles.y, gravZoneRotation.eulerAngles.z), Time.deltaTime * rotateSpeedEnterGravZone);
             }
         }
         else
@@ -111,27 +102,13 @@ public class PlayerControl : MonoBehaviour
         if (isOnGravityZone)
         {
             rb.AddForce(-transform.up * gravZonePower);
-            closestPoint = gravityZone.GetComponent<BoxCollider>().ClosestPoint(this.transform.position);
         }
 
         UIManager.Instance.SetJetPackFuel(((jetPackFuel * 100) / jetPackMaxFuel) / 100);
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
+        UseJetpack(jetPackUsageStack);
     }
 
-    private void MainFire()
-    {
-
-    }
-
-    private void FireGrappler()
-    {
-
-    }
-
-    private void StopGrappling()
-    {
-
-    }
 
     private void CheckIsGrounded()
     {
@@ -232,7 +209,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-       if (isGrounded || (inputX == 0 || inputZ == 0))
+        if (isGrounded || (inputX == 0 || inputZ == 0))
         {
             jetPackFuel += jetPackRegen;
         }
@@ -241,7 +218,7 @@ public class PlayerControl : MonoBehaviour
 
         if (!isGrounded && jetPackFuel > 0)
         {
-            jetPackFuel -= (Mathf.Abs(inputX) + Mathf.Abs(inputZ)) * jetPackUsage;
+            jetPackUsageStack += (Mathf.Abs(inputX) + Mathf.Abs(inputZ) * jetPackHorizontalUsage);
             rb.AddForce(movement * aerialSpeed);
         }
         else if (isGrounded)
@@ -271,7 +248,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetButton("Jump") && canUseJetPack && jetPackFuel > 0)
             {
-                jetPackFuel -= 1 * jetPackUsage;
+                jetPackUsageStack += 1 * jetPackVerticalUsage;
                 rb.AddForce(transform.up * aerialSpeed);
                 UIManager.Instance.SetUpForce(1);
             }
@@ -282,7 +259,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftControl) && jetPackFuel > 0)
             {
-                jetPackFuel -= 1 * jetPackUsage;
+                jetPackUsageStack += 1 * jetPackVerticalUsage;
                 rb.AddForce(-transform.up * aerialSpeed);
                 UIManager.Instance.SetDownForce(1);
             }
@@ -291,6 +268,21 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetDownForce(0);
             }
         }
+    }
+
+    private void UseJetpack(float power)
+    {
+        float light = 0;
+
+        if (!isGrounded)
+        {
+            light += baseJetpackLightIntensity;
+        }
+
+        light += power;
+        jetPackFuel -= jetPackUsageStack;
+        jetPackLightFeedback.intensity = light;
+        jetPackUsageStack = 0;
     }
 
 
