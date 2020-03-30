@@ -1,7 +1,82 @@
 fileFormatVersion: 2
 guid: edf4225d5f32d31448900235b66d7e15
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3525064096994566179
+    second: Bashkir_runes_0
+  - first:
+      213: 6714387473323725209
+    second: Bashkir_runes_1
+  - first:
+      213: -1089494001080783038
+    second: Bashkir_runes_2
+  - first:
+      213: 3706636766618755171
+    second: Bashkir_runes_3
+  - first:
+      213: 4261586628185298472
+    second: Bashkir_runes_4
+  - first:
+      213: -3322361911193549978
+    second: Bashkir_runes_5
+  - first:
+      213: 2721280114256766361
+    second: Bashkir_runes_6
+  - first:
+      213: 4792423103553476056
+    second: Bashkir_runes_7
+  - first:
+      213: -5486381273673258434
+    second: Bashkir_runes_8
+  - first:
+      213: 4955041353602518969
+    second: Bashkir_runes_9
+  - first:
+      213: -5384619663154151310
+    second: Bashkir_runes_10
+  - first:
+      213: -3250696386996311687
+    second: Bashkir_runes_11
+  - first:
+      213: 878469830684875179
+    second: Bashkir_runes_12
+  - first:
+      213: -1119940288349289368
+    second: Bashkir_runes_13
+  - first:
+      213: 4923995346181996382
+    second: Bashkir_runes_14
+  - first:
+      213: -2385410182881765676
+    second: Bashkir_runes_15
+  - first:
+      213: -951957768409928526
+    second: Bashkir_runes_16
+  - first:
+      213: -6073948054718735097
+    second: Bashkir_runes_17
+  - first:
+      213: -5936958069567830594
+    second: Bashkir_runes_18
+  - first:
+      213: 7617305588950326571
+    second: Bashkir_runes_19
+  - first:
+      213: -9097923724697792017
+    second: Bashkir_runes_20
+  - first:
+      213: 2422269385929163867
+    second: Bashkir_runes_21
+  - first:
+      213: -3061918345516473673
+    second: Bashkir_runes_22
+  - first:
+      213: 3434196317411241800
+    second: Bashkir_runes_23
+  - first:
+      213: 1095344198627301730
+    second: Bashkir_runes_24
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +115,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,7 +159,532 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Bashkir_runes_0
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 539
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f34cf43a7b825d409f2076b13b29087
+      internalID: -3525064096994566179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_1
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 539
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac27c29648c3d9342906e12b28e66529
+      internalID: 6714387473323725209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_2
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 539
+        width: 97
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46169c7b38b0134d8e1801cf7da8143
+      internalID: -1089494001080783038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_3
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 539
+        width: 85
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e05508737a94594f9805b5138009b36
+      internalID: 3706636766618755171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_4
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 539
+        width: 85
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343a9faab29c6c94e80a584c9cf4ff17
+      internalID: 4261586628185298472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 423
+        width: 98
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5999a93f56c2c14e97e028a463f6816
+      internalID: -3322361911193549978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_6
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 422
+        width: 85
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48cbf7b992fc9a140a43767509a669ff
+      internalID: 2721280114256766361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_7
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 422
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87b24c08b10aebf44bd5fb3ffd24fcb5
+      internalID: 4792423103553476056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_8
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 422
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84266a70296c267488185bf81b3da9c7
+      internalID: -5486381273673258434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_9
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 422
+        width: 98
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90b3efc6df70054429161e7ee036f688
+      internalID: 4955041353602518969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_10
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 294
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd279f42a8ace14a91ba8bafe33c53b
+      internalID: -5384619663154151310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 295
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee7710f90bb8b34fa921a180a4732f8
+      internalID: -3250696386996311687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_12
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 295
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e772838ae854f4f865fb352a65c81c
+      internalID: 878469830684875179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 295
+        width: 98
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a40c55141023294a82feea66b4958d8
+      internalID: -1119940288349289368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_14
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 295
+        width: 85
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec04b47a2a660845907a2cc3f1f2a8e
+      internalID: 4923995346181996382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_15
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 167
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4376b1a389a96b4488a4b83f5c82a0ec
+      internalID: -2385410182881765676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_16
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 169
+        width: 97
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e634ccf03c36ec4e89e5cb0718ccebf
+      internalID: -951957768409928526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_17
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 167
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2123c3907a8c3744b5626d3f949cf0f
+      internalID: -6073948054718735097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_18
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 167
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d429c6a538fbc1a438265d0bbc58fa39
+      internalID: -5936958069567830594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_19
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 167
+        width: 85
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50220d7ec50062849a74059633e2329a
+      internalID: 7617305588950326571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_20
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 41
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aff859ec5435a945bf1f13d07f36650
+      internalID: -9097923724697792017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_21
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 41
+        width: 86
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07e348b6bc41f64fbedfb2995f81e37
+      internalID: 2422269385929163867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_22
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 41
+        width: 98
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80feb54f3e5cb8b409cf6e38a6529a17
+      internalID: -3061918345516473673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_23
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 41
+        width: 85
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e17f98a4e32ad4cadfa2e42e0aed95
+      internalID: 3434196317411241800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bashkir_runes_24
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 41
+        width: 97
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93bd6d0598e715646bb271914c329452
+      internalID: 1095344198627301730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
