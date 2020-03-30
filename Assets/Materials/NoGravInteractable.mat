@@ -138,7 +138,7 @@ Material:
     - Color_7ABCC5D9: {r: 1, g: 0.49052402, b: 0.051886797, a: 0}
     - Color_BC258677: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_19AE9E3A: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_40DF1A9C: {r: 1.32, g: 6.17, b: 0, a: 0}
+    - Vector2_40DF1A9C: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_5200A5FE: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_70D50CBA: {r: 10, g: 10, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.44054037, b: 0, a: 1}
