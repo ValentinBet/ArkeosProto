@@ -5,11 +5,13 @@ using UnityEngine;
 public class GravityZone : MonoBehaviour
 {
     public GameObject parent;
+    public MeshCollider parentCollider;
     public float gravZonePower = 20f;
     
     private void Start()
     {
         parent = transform.parent.gameObject;
+        parentCollider = parent.GetComponent<MeshCollider>();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
 
     [Space(8)]
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform UpCheck;
     [SerializeField] private float groundCheckDistance = 0.3f;
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private Transform playerTransform;
@@ -43,6 +44,7 @@ public class PlayerControl : MonoBehaviour
     public float gravZoneExitRotateTime = 2f;
     public float rotateSpeedEnterGravZone = 10;
     public float rotateSpeedExitGravZone = 15;
+    public float speedDividerWhenEntered = 4f;
     public GravityZone gravityZone;
     public bool isOnGravityZone = false;
     private bool isSettingGravZoneRotation = false;
@@ -58,7 +60,11 @@ public class PlayerControl : MonoBehaviour
     private float mouseY;
     private float mouseZ;
     private Vector3 movement;
+    // GravZoneRotation
     private Vector3 closestPoint = Vector3.zero;
+    private Vector3 gravZoneDirection = Vector3.zero;
+    private Quaternion targetRotation;
+    // <<
     private bool canUseJetPack = true;
     private bool isGrounded;
     private Transform ground;
@@ -68,7 +74,6 @@ public class PlayerControl : MonoBehaviour
     {
         jetPackMaxFuel = jetPackFuel;
         mainCameraTransform = Camera.main.transform;
-        playerTransform = this.transform;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -77,30 +82,22 @@ public class PlayerControl : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
 
-        if (isSettingGravZoneRotation)
-        {
-            if (isOnGravityZone)
-            {
-                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, gravZoneRotation, Time.deltaTime * rotateSpeedEnterGravZone);
-                // ne fonctionne pas car certain mur on besoin de l'axe Y / permet la stabilité de la caméra
-               // playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(gravZoneRotation.eulerAngles.x, playerTransform.rotation.eulerAngles.y, gravZoneRotation.eulerAngles.z), Time.deltaTime * rotateSpeedEnterGravZone);
-            }
-        }
-        else
-        {
-            if (!isOnGravityZone)
-            {
-                playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, playerTransform.rotation.eulerAngles.y, 0), Time.deltaTime * rotateSpeedExitGravZone);
-            }
 
-            AerialMovementControl();
+        if (!isOnGravityZone)
+        {
+            playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation, Quaternion.Euler(0, playerTransform.rotation.eulerAngles.y, 0), Time.deltaTime * rotateSpeedExitGravZone);
         }
 
+        AerialMovementControl();
         GroundMovementControl();
         RotationControl();
 
         if (isOnGravityZone)
         {
+            closestPoint = gravityZone.parentCollider.ClosestPoint(UpCheck.position);
+            gravZoneDirection = closestPoint - UpCheck.position;
+            targetRotation = Quaternion.FromToRotation(-transform.up, gravZoneDirection) * playerTransform.rotation;
+            playerTransform.rotation = Quaternion.RotateTowards(playerTransform.rotation, targetRotation, rotateSpeedEnterGravZone);
             rb.AddForce(-transform.up * gravZonePower);
         }
 
@@ -108,7 +105,6 @@ public class PlayerControl : MonoBehaviour
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
         UseJetpack(jetPackUsageStack);
     }
-
 
     private void CheckIsGrounded()
     {
@@ -143,11 +139,7 @@ public class PlayerControl : MonoBehaviour
     {
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        if (!isSettingGravZoneRotation)
-        {
-            playerTransform.Rotate(Vector3.up * mouseX);
-        }
+        playerTransform.Rotate(Vector3.up * mouseX);
 
         verticalRotation -= mouseY;
 
@@ -290,10 +282,10 @@ public class PlayerControl : MonoBehaviour
     {
         isSettingExitGravZoneRotation = false;
         this.gravityZone = gravityZone;
+        rb.velocity /= speedDividerWhenEntered;
         gravZoneRotation = gravityZone.parent.transform.rotation;
         isOnGravityZone = true;
         rb.useGravity = false;
-        StartCoroutine(SetRotationInGravZone());
     }
 
 
@@ -303,17 +295,10 @@ public class PlayerControl : MonoBehaviour
         {
             isSettingGravZoneRotation = false;
             rb.useGravity = true;
-            this.gravityZone = null;
             isOnGravityZone = false;
         }
     }
 
-    IEnumerator SetRotationInGravZone()
-    {
-        isSettingGravZoneRotation = true;
-        yield return new WaitForSeconds(gravZoneEnterRotateTime);
-        isSettingGravZoneRotation = false;
-    }
 
     IEnumerator SetCanUseJetPack()
     {

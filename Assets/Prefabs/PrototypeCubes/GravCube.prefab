@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461195481996942683}
-  - component: {fileID: 1461195481996942681}
   - component: {fileID: 1461195481996942682}
+  - component: {fileID: 2167454092771387873}
   m_Layer: 0
   m_Name: GravZone
   m_TagString: Immaterial
@@ -26,25 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461195481996942684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.0581613, y: -0.23041844, z: -0.49120525}
-  m_LocalScale: {x: 7.9999313, y: 1, z: 0.966624}
+  m_LocalPosition: {x: 4.03, y: 0.52, z: -0.498}
+  m_LocalScale: {x: 8, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7428260717452841078}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1461195481996942681
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461195481996942684}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.95, y: 1.5, z: 0.98}
-  m_Center: {x: 0, y: 1.11, z: 0}
 --- !u!114 &1461195481996942682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +45,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  parentCollider: {fileID: 0}
   gravZonePower: 10
+--- !u!65 &2167454092771387873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461195481996942684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7428260717452841033
 GameObject:
   m_ObjectHideFlags: 0
