@@ -23,6 +23,7 @@ public class GrapplingHook : MonoBehaviour
 
     private void Awake()
     {
+        hook = GameObject.FindGameObjectWithTag("Hook");
         pc = GetComponent<PlayerControl>();
     }
     private void Update()
