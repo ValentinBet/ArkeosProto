@@ -281,8 +281,8 @@ ScriptedImporter:
     material: {fileID: 7344878334620335837, guid: 7d0bbc02bde63a94ab682f109eb28546,
       type: 3}
     generatedTextures:
-    - {fileID: -73578249865642639, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
     - {fileID: -4105962066824520676, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
-    - {fileID: -2526445197254800535, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
-    - {fileID: 1872603504489687348, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
     - {fileID: 2918290706303727430, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
+    - {fileID: 1872603504489687348, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
+    - {fileID: -2526445197254800535, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
+    - {fileID: -73578249865642639, guid: 7d0bbc02bde63a94ab682f109eb28546, type: 3}
