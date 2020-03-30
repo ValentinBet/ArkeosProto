@@ -40,8 +40,8 @@ public class PlayerControl : MonoBehaviour
     private float jetPackUsageStack;
 
     [Header("Gravity Zone properties")]
-    public float gravZoneEnterRotateTime = 0.5f;
-    public float gravZoneExitRotateTime = 2f;
+    //public float gravZoneEnterRotateTime = 0.5f;
+    //public float gravZoneExitRotateTime = 2f;
     public float rotateSpeedEnterGravZone = 10;
     public float rotateSpeedExitGravZone = 15;
     public float speedDividerWhenEntered = 4f;

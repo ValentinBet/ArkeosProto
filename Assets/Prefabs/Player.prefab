@@ -418,10 +418,8 @@ MonoBehaviour:
   jetPackHorizontalUsage: 1
   jetPackVerticalUsage: 2
   baseJetpackLightIntensity: 1
-  gravZoneEnterRotateTime: 1
-  gravZoneExitRotateTime: 2
-  rotateSpeedEnterGravZone: 5
-  rotateSpeedExitGravZone: 3
+  rotateSpeedEnterGravZone: 4
+  rotateSpeedExitGravZone: 1.5
   speedDividerWhenEntered: 4
   gravityZone: {fileID: 0}
   isOnGravityZone: 0
