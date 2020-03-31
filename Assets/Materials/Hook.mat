@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hook
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,6 +33,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_9D48127C:
+        m_Texture: {fileID: 2800000, guid: edf4225d5f32d31448900235b66d7e15, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AD1090AA:
+        m_Texture: {fileID: 2800000, guid: fd3c0637122bcb147ac8eae1f9aa16b5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B0223ADB:
+        m_Texture: {fileID: 2800000, guid: 8bf215de09cd62a4b983c3edf204bab5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_EC210640:
+        m_Texture: {fileID: 2800000, guid: d4a22e8d8c94a724285651d3234f6c8a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F5C96D54:
+        m_Texture: {fileID: 2800000, guid: 485c875f4c8cd2d4c982185fdd009c8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: b756a9825da98424e973dbdbf82dceb7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -78,6 +98,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2AE619A0: 1
+    - Vector1_42AF77E8: 1
+    - Vector1_7C55CC6D: 0.5
+    - Vector1_B889B2F3: 1
+    - Vector1_FAE8CB1D: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -95,6 +120,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -104,6 +130,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_117840D7: {r: 0, g: 0, b: 0, a: 0}
+    - Color_7ABCC5D9: {r: 0, g: 1, b: 0.04225135, a: 0}
+    - Color_BC258677: {r: 1, g: 1, b: 1, a: 0}
+    - Vector2_19AE9E3A: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_40DF1A9C: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_5200A5FE: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_70D50CBA: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 1}
     - _Color: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -113,6 +113,7 @@ public class PlayerControl : MonoBehaviour
             rb.AddForce(-transform.up * gravZonePower);
         }
 
+        UIManager.Instance.SetPlayerRotationTransformFeedback(playerTransform.rotation.eulerAngles);
         UIManager.Instance.SetJetPackFuel(((jetPackFuel * 100) / jetPackMaxFuel) / 100);
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
         UseJetpack(jetPackUsageStack);

@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     private static UIManager _instance;
     public static UIManager Instance { get { return _instance; } }
 
-    [SerializeField] private Text UI_testText;
+    [SerializeField] private RectTransform UI_playerRtTransform;
 
     [SerializeField] private Image UI_upForce;
     [SerializeField] private Image UI_downForce;
@@ -41,6 +41,11 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    public void SetPlayerRotationTransformFeedback(Vector3 playerRotation)
+    {
+        UI_playerRtTransform.rotation = Quaternion.Euler(playerRotation.x, 0, playerRotation.z);
+    }
+
     public void SetUpForce(float force)
     {
         UI_upForce.fillAmount = force;
