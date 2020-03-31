@@ -13,25 +13,33 @@ public class PlayerControl : MonoBehaviour
     /// <remarks>
     /// Cette classe est le moteur principal de ce prototype
     /// </remarks>
+    /// 
+
+    [Header("Inputs")]
+    public KeyCode Crouch = KeyCode.C;
+    public KeyCode Jump = KeyCode.Space;
+    public KeyCode Dive = KeyCode.LeftControl;
+
+    [Header("Player references")]
     public Rigidbody rb;
     public LayerMask groundLayer;
+    public Light jetPackLightFeedback;
+    [SerializeField] private Transform mainCameraTransform;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform UpCheck;
 
+    [Header("Player properties")]
     public float mouseSensitivity = 100f;
     public float aerialSpeed = 10f;
     public float groundSpeed = 6f;
     public float runGroundSpeed = 8.5f;
     public float jumpHeight = 3f;
-    public float jetPackWaitTimeAfterJump = 0.2f;
-    public Light jetPackLightFeedback;
-
-    [Space(8)]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform UpCheck;
+    public float crouchHeight = 0.5f;
     [SerializeField] private float groundCheckDistance = 0.3f;
-    [SerializeField] private Transform mainCameraTransform;
-    [SerializeField] private Transform playerTransform;
 
     [Header("JetPack properties")]
+    public float jetPackWaitTimeAfterJump = 0.2f;
     public float jetPackFuel = 100f;
     public float jetPackRegen = 1f;
     public float jetPackHorizontalUsage = 1f;
@@ -51,30 +59,34 @@ public class PlayerControl : MonoBehaviour
     private bool isSettingExitGravZoneRotation = false;
     private Quaternion gravZoneRotation;
     [HideInInspector] public float gravZonePower = 0f; // Set when enter a grav zone
-    [Space(8)]
+
+    // ----- //
 
     private Vector3 lastForceTake;
     private Vector3 velocity;
+    private Vector3 movement;
     private float verticalRotation;
     private float mouseX;
     private float mouseY;
     private float mouseZ;
-    private Vector3 movement;
+    private float jetPackMaxFuel;
+    private bool canUseJetPack = true;
+    private bool isGrounded;
+    private bool isCrouched;
+    private CapsuleCollider playerCollider;
+
     // GravZoneRotation
     private Vector3 closestPoint = Vector3.zero;
     private Vector3 gravZoneDirection = Vector3.zero;
     private Quaternion targetRotation;
     // <<
-    private bool canUseJetPack = true;
-    private bool isGrounded;
-    private Transform ground;
-    private float jetPackMaxFuel;
 
     private void Start()
     {
         jetPackMaxFuel = jetPackFuel;
         mainCameraTransform = Camera.main.transform;
         Cursor.lockState = CursorLockMode.Locked;
+        playerCollider = this.GetComponent<CapsuleCollider>();
     }
 
     private void FixedUpdate()
@@ -108,30 +120,14 @@ public class PlayerControl : MonoBehaviour
 
     private void CheckIsGrounded()
     {
-
         if (Physics.Raycast(groundCheck.position, -transform.up, groundCheckDistance, groundLayer))
         {
-
-            if (!isGrounded)
-            {
-                print("grounded");
-            }
-
             rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), Time.deltaTime * 10);
-
             isGrounded = true;
         }
         else
         {
             isGrounded = false;
-        }
-
-        if (isGrounded)
-        {
-            Collider[] grounds = Physics.OverlapSphere(groundCheck.position, groundCheckDistance, groundLayer);
-
-            ground = grounds[0].transform;
-
         }
     }
 
@@ -161,7 +157,34 @@ public class PlayerControl : MonoBehaviour
         {
             inputX = Input.GetAxisRaw("Horizontal");
             inputZ = Input.GetAxisRaw("Vertical");
+
+            if ((inputX == 0 || inputZ == 0))
+            {
+                jetPackFuel += jetPackRegen;
+            }
         }
+
+        if (Input.GetKey(Crouch))
+        {
+            if (!isCrouched)
+            {
+                isCrouched = true;
+                mainCameraTransform.Translate(-Vector3.up * crouchHeight);
+                playerCollider.height -= crouchHeight;
+                playerCollider.center -= new Vector3(0, crouchHeight / 2, 0);
+            }
+        }
+        else
+        {
+            if (isCrouched)
+            {
+                isCrouched = false;
+                mainCameraTransform.Translate(Vector3.up * crouchHeight);
+                playerCollider.height += crouchHeight;
+                playerCollider.center += new Vector3(0, crouchHeight / 2, 0);
+            }
+        }
+
 
         if (inputX != 0 || inputZ != 0)
         {
@@ -201,11 +224,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (isGrounded || (inputX == 0 || inputZ == 0))
-        {
-            jetPackFuel += jetPackRegen;
-        }
-
         movement = transform.right * inputX + transform.forward * inputZ;
 
         if (!isGrounded && jetPackFuel > 0)
@@ -215,13 +233,13 @@ public class PlayerControl : MonoBehaviour
         }
         else if (isGrounded)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(Jump))
             {
                 StartCoroutine(SetCanUseJetPack());
                 rb.velocity += jumpHeight * transform.up;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(Dive))
             {
                 rb.MovePosition(transform.position + (movement * Time.deltaTime * runGroundSpeed));
             }
@@ -230,15 +248,13 @@ public class PlayerControl : MonoBehaviour
                 rb.MovePosition(transform.position + (movement * Time.deltaTime * groundSpeed));
             }
         }
-
-
     }
 
     private void AerialMovementControl()
     {
         if (!isGrounded)
         {
-            if (Input.GetButton("Jump") && canUseJetPack && jetPackFuel > 0)
+            if (Input.GetKey(Jump) && canUseJetPack && jetPackFuel > 0)
             {
                 jetPackUsageStack += 1 * jetPackVerticalUsage;
                 rb.AddForce(transform.up * aerialSpeed);
@@ -249,7 +265,7 @@ public class PlayerControl : MonoBehaviour
                 UIManager.Instance.SetUpForce(0);
             }
 
-            if (Input.GetKey(KeyCode.LeftControl) && jetPackFuel > 0)
+            if (Input.GetKey(Dive) && jetPackFuel > 0)
             {
                 jetPackUsageStack += 1 * jetPackVerticalUsage;
                 rb.AddForce(-transform.up * aerialSpeed);

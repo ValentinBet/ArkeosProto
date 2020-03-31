@@ -69,7 +69,6 @@ public class GrapplingHook : MonoBehaviour
 
             if (currentDistance > maxDistance)
             {
-                GivePlayerVelocity();
                 ReturnHook();
             }
         }
@@ -86,7 +85,6 @@ public class GrapplingHook : MonoBehaviour
 
     private void GivePlayerVelocity()
     {
-
         pc.rb.velocity = Vector3.zero;
         pc.rb.AddForce(direction * (hookTime * 2) * playerTravelSpeed * GrapplerSlingVelocityMultiplier);
     }

@@ -343,8 +343,8 @@ GameObject:
   - component: {fileID: 2278301679194923448}
   - component: {fileID: 2278301679194923430}
   - component: {fileID: 2278301679194923428}
-  - component: {fileID: 2278301679194923449}
   - component: {fileID: 2278301679194923431}
+  - component: {fileID: 2278301678940446296}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -397,22 +397,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad4ab7db075fdd4d907387170e8d9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crouch: 99
+  Jump: 32
+  Dive: 306
   rb: {fileID: 2278301679194923451}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  jetPackLightFeedback: {fileID: 2278301678320498299}
+  mainCameraTransform: {fileID: 2278301679084565282}
+  playerTransform: {fileID: 2278301679194923450}
+  groundCheck: {fileID: 2278301679345278536}
+  UpCheck: {fileID: 2278301678859594165}
   mouseSensitivity: 150
   aerialSpeed: 70
   groundSpeed: 6
   runGroundSpeed: 9
   jumpHeight: 5
-  jetPackWaitTimeAfterJump: 0.5
-  jetPackLightFeedback: {fileID: 2278301678320498299}
-  groundCheck: {fileID: 2278301679345278536}
-  UpCheck: {fileID: 2278301678859594165}
+  crouchHeight: 0.5
   groundCheckDistance: 0.3
-  mainCameraTransform: {fileID: 2278301679084565282}
-  playerTransform: {fileID: 2278301679194923450}
+  jetPackWaitTimeAfterJump: 0.5
   jetPackFuel: 10000
   jetPackRegen: 3
   jetPackHorizontalUsage: 1
@@ -458,19 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c6374a1f07d7b4b99d66d2cfdae937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &2278301679194923449
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2278301679194923453}
-  m_Material: {fileID: 13400000, guid: 40f6b515cdb1ec9448287f2b426a3ab6, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.63, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!120 &2278301679194923431
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -567,6 +558,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!136 &2278301678940446296
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2278301679194923453}
+  m_Material: {fileID: 13400000, guid: 40f6b515cdb1ec9448287f2b426a3ab6, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2278301679299743188
 GameObject:
   m_ObjectHideFlags: 0
