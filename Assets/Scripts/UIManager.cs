@@ -29,6 +29,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image UI_jetPackFuel;
     [SerializeField] private Text UI_jetPackFuelText;
 
+    [SerializeField] private Image UI_energy;
+    [SerializeField] private Text UI_energyText;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -75,6 +78,12 @@ public class UIManager : MonoBehaviour
     {
         UI_jetPackFuel.fillAmount = fuelAmount;
         UI_jetPackFuelText.text = (fuelAmount * 100).ToString("###");
+    }
+
+    public void SetEnergy(float Energy)
+    {
+        UI_energy.fillAmount = Energy / 100;
+        UI_energyText.text = Energy.ToString("###");
     }
 
 }

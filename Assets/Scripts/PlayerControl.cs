@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour
     public float runGroundSpeed = 8.5f;
     public float jumpHeight = 3f;
     public float crouchHeight = 0.5f;
+    public float playerLife = 100;
     [SerializeField] private float groundCheckDistance = 0.3f;
 
     [Header("JetPack properties")]
@@ -65,11 +66,13 @@ public class PlayerControl : MonoBehaviour
     private Vector3 lastForceTake;
     private Vector3 velocity;
     private Vector3 movement;
+    private Vector3 spawnPoint;
     private float verticalRotation;
     private float mouseX;
     private float mouseY;
     private float mouseZ;
     private float jetPackMaxFuel;
+    private float maxLife;
     private bool canUseJetPack = true;
     private bool isGrounded;
     private bool isCrouched;
@@ -87,10 +90,19 @@ public class PlayerControl : MonoBehaviour
         mainCameraTransform = Camera.main.transform;
         Cursor.lockState = CursorLockMode.Locked;
         playerCollider = this.GetComponent<CapsuleCollider>();
+        spawnPoint = playerTransform.position;
+        maxLife = playerLife;
     }
 
     private void FixedUpdate()
     {
+
+        if (playerLife < 1)
+        {
+            Respawn();
+        }
+
+
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
 
@@ -115,10 +127,17 @@ public class PlayerControl : MonoBehaviour
 
         UIManager.Instance.SetPlayerRotationTransformFeedback(playerTransform.rotation.eulerAngles);
         UIManager.Instance.SetJetPackFuel(((jetPackFuel * 100) / jetPackMaxFuel) / 100);
+        UIManager.Instance.SetEnergy(playerLife);
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
         UseJetpack(jetPackUsageStack);
     }
 
+    private void Respawn()
+    {
+        rb.velocity = Vector3.zero;
+        playerLife = maxLife;
+        playerTransform.position = spawnPoint;
+    }
     private void CheckIsGrounded()
     {
         if (Physics.Raycast(groundCheck.position, -transform.up, groundCheckDistance, groundLayer))
