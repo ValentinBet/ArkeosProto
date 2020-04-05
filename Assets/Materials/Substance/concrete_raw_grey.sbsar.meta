@@ -87,7 +87,7 @@ ScriptedImporter:
       - name: _ReceiveShadows
         float: 1
       - name: _Smoothness
-        float: 0.524
+        float: 0.5
       - name: _SmoothnessTextureChannel
         float: 0
       - name: _SpecularHighlights
@@ -106,7 +106,7 @@ ScriptedImporter:
       - name: _Color
         color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
       - name: _EmissionColor
-        color: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+        color: {r: 0, g: 0, b: 0, a: 1}
       - name: _SpecColor
         color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     outputDescList:
