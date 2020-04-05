@@ -253,7 +253,7 @@ public class PlayerControl : MonoBehaviour
 
         if (!isGrounded && jetPackFuel > 0)
         {
-            jetPackUsageStack += (Mathf.Abs(inputX) + Mathf.Abs(inputZ) * jetPackHorizontalUsage);
+            jetPackUsageStack += (Mathf.Abs(inputX) + Mathf.Abs(inputZ)) * jetPackHorizontalUsage;
             rb.AddForce(movement * aerialSpeed);
         }
         else if (isGrounded)
@@ -292,7 +292,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(Dive) && jetPackFuel > 0)
             {
-                jetPackUsageStack += 1 * jetPackVerticalUsage;
+                jetPackUsageStack += 1 * jetPackHorizontalUsage;
                 rb.AddForce(-transform.up * aerialSpeed);
                 UIManager.Instance.SetDownForce(1);
             }
