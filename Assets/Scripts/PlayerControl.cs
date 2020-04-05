@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     public KeyCode Crouch = KeyCode.C;
     public KeyCode Jump = KeyCode.Space;
     public KeyCode Dive = KeyCode.LeftControl;
+    public KeyCode run = KeyCode.LeftShift;
 
     [Header("Player references")]
     public Rigidbody rb;
@@ -264,7 +265,7 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity += jumpHeight * transform.up;
             }
 
-            if (Input.GetKey(Dive))
+            if (Input.GetKey(run))
             {
                 rb.MovePosition(transform.position + (movement * Time.deltaTime * runGroundSpeed));
             }
