@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     public KeyCode Crouch = KeyCode.C;
     public KeyCode Jump = KeyCode.Space;
     public KeyCode Dive = KeyCode.LeftControl;
+    public KeyCode run = KeyCode.LeftShift;
 
     [Header("Player references")]
     public Rigidbody rb;
@@ -253,7 +254,7 @@ public class PlayerControl : MonoBehaviour
 
         if (!isGrounded && jetPackFuel > 0)
         {
-            jetPackUsageStack += (Mathf.Abs(inputX) + Mathf.Abs(inputZ) * jetPackHorizontalUsage);
+            jetPackUsageStack += (Mathf.Abs(inputX) + Mathf.Abs(inputZ)) * jetPackHorizontalUsage;
             rb.AddForce(movement * aerialSpeed);
         }
         else if (isGrounded)
@@ -264,7 +265,7 @@ public class PlayerControl : MonoBehaviour
                 rb.velocity += jumpHeight * transform.up;
             }
 
-            if (Input.GetKey(Dive))
+            if (Input.GetKey(run))
             {
                 rb.MovePosition(transform.position + (movement * Time.deltaTime * runGroundSpeed));
             }
@@ -292,7 +293,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKey(Dive) && jetPackFuel > 0)
             {
-                jetPackUsageStack += 1 * jetPackVerticalUsage;
+                jetPackUsageStack += 1 * jetPackHorizontalUsage;
                 rb.AddForce(-transform.up * aerialSpeed);
                 UIManager.Instance.SetDownForce(1);
             }
