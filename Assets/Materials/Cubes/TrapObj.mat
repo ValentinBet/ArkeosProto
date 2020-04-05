@@ -142,7 +142,7 @@ Material:
     - Vector2_19AE9E3A: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_40DF1A9C: {r: 1, g: 4, b: 0, a: 0}
     - Vector2_5200A5FE: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_70D50CBA: {r: 10, g: 10, b: 0, a: 0}
+    - Vector2_70D50CBA: {r: 3, g: 10, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.44054037, b: 0, a: 1}
     - _Color: {r: 1, g: 0.44054037, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
