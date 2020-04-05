@@ -31,7 +31,9 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Player properties")]
     public float mouseSensitivity = 100f;
-    public float aerialSpeed = 10f;
+    public float maxSpeed = 50f;
+    public float aerialSpeed = 150f;
+    public float aerialUpSpeed = 300f;
     public float groundSpeed = 6f;
     public float runGroundSpeed = 8.5f;
     public float jumpHeight = 3f;
@@ -96,12 +98,10 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (playerLife < 1)
         {
             Respawn();
         }
-
 
         rb.angularVelocity = Vector3.zero;
         CheckIsGrounded();
@@ -130,6 +130,11 @@ public class PlayerControl : MonoBehaviour
         UIManager.Instance.SetEnergy(playerLife);
         jetPackFuel = Mathf.Clamp(jetPackFuel, 0, jetPackMaxFuel);
         UseJetpack(jetPackUsageStack);
+
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
     }
 
     private void Respawn()
@@ -277,7 +282,7 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKey(Jump) && canUseJetPack && jetPackFuel > 0)
             {
                 jetPackUsageStack += 1 * jetPackVerticalUsage;
-                rb.AddForce(transform.up * aerialSpeed);
+                rb.AddForce(transform.up * aerialUpSpeed);
                 UIManager.Instance.SetUpForce(1);
             }
             else

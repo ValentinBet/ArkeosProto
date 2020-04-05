@@ -303,7 +303,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10000
+  far clip plane: 50000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -410,11 +410,14 @@ MonoBehaviour:
   groundCheck: {fileID: 2278301679345278536}
   UpCheck: {fileID: 2278301678859594165}
   mouseSensitivity: 150
+  maxSpeed: 50
   aerialSpeed: 70
+  aerialUpSpeed: 300
   groundSpeed: 6
   runGroundSpeed: 9
   jumpHeight: 5
   crouchHeight: 0.5
+  playerLife: 100
   groundCheckDistance: 0.3
   jetPackWaitTimeAfterJump: 0.5
   jetPackFuel: 10000
@@ -447,7 +450,7 @@ MonoBehaviour:
   playerTravelSpeed: 5
   maxDistance: 25
   distanceToStopHook: 1
-  GrapplerSlingVelocityMultiplier: 1000
+  GrapplerSlingVelocityMultiplier: 2000
   fired: 0
   hooked: 0
 --- !u!114 &2278301679194923428

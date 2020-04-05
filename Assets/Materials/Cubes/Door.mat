@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TrapObj
+  m_Name: Door
   m_Shader: {fileID: -6465566751694194690, guid: da2487447db403e44b9daf2655583581,
     type: 3}
   m_ShaderKeywords: 
@@ -103,12 +103,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - Vector1_2AE619A0: 1
+    - Vector1_2AE619A0: 2
     - Vector1_42AF77E8: 1
-    - Vector1_7C55CC6D: 0.5
-    - Vector1_B889B2F3: 1
+    - Vector1_7C55CC6D: 0
+    - Vector1_B889B2F3: 2
     - Vector1_C23D977C: 1
-    - Vector1_FAE8CB1D: 0
+    - Vector1_FAE8CB1D: 0.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -137,12 +137,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_117840D7: {r: 0, g: 0, b: 0, a: 0}
-    - Color_7ABCC5D9: {r: 1, g: 0.4221933, b: 0, a: 0}
+    - Color_7ABCC5D9: {r: 1, g: 1, b: 1, a: 0}
     - Color_BC258677: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_19AE9E3A: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_40DF1A9C: {r: 1, g: 4, b: 0, a: 0}
+    - Vector2_40DF1A9C: {r: 0.6, g: 0.8, b: 0, a: 0}
     - Vector2_5200A5FE: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_70D50CBA: {r: 3, g: 10, b: 0, a: 0}
+    - Vector2_70D50CBA: {r: 3, g: 3, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.44054037, b: 0, a: 1}
     - _Color: {r: 1, g: 0.44054037, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -86,7 +86,7 @@ public class GrapplingHook : MonoBehaviour
     private void GivePlayerVelocity()
     {
         pc.rb.velocity = Vector3.zero;
-        pc.rb.AddForce(direction * (hookTime * 2) * playerTravelSpeed * GrapplerSlingVelocityMultiplier);
+        pc.rb.AddForce(direction * (hookTime * 1.3f) * playerTravelSpeed * GrapplerSlingVelocityMultiplier);
     }
 
     private void ReturnHook()
